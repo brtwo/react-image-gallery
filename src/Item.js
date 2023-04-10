@@ -1,5 +1,5 @@
-import React from 'react';
-import { bool, func, string } from 'prop-types';
+import React, { useRef, useEffect } from 'react';
+import { bool, func, number, string } from 'prop-types';
 
 const Item = React.memo(({
   description,
@@ -15,24 +15,52 @@ const Item = React.memo(({
   sizes,
   srcSet,
   loading,
+  video,
+  currentIndex,
 }) => {
   const itemSrc = isFullscreen ? (fullscreen || original) : original;
 
+  const videoRef = useRef();
+
+  useEffect(() => {
+    if (videoRef?.current) {
+      videoRef.current.pause();
+    }
+  }, [currentIndex])
+
   return (
     <React.Fragment>
-      <img
-        className="image-gallery-image"
-        src={itemSrc}
-        alt={originalAlt}
-        srcSet={srcSet}
-        height={originalHeight}
-        width={originalWidth}
-        sizes={sizes}
-        title={originalTitle}
-        onLoad={event => handleImageLoaded(event, original)}
-        onError={onImageError}
-        loading={loading}
-      />
+      {
+        video ? (
+          <video
+            ref={videoRef}
+            src={video}
+            alt={originalAlt}
+            title={originalTitle}
+            height={originalHeight}
+            width={originalWidth}
+            loading={loading}
+            className="image-gallery-image"
+            loop
+            controls
+            controlsList="nodownload"
+          />
+        ) : (
+          <img
+            className="image-gallery-image"
+            src={itemSrc}
+            alt={originalAlt}
+            srcSet={srcSet}
+            height={originalHeight}
+            width={originalWidth}
+            sizes={sizes}
+            title={originalTitle}
+            onLoad={event => handleImageLoaded(event, original)}
+            onError={onImageError}
+            loading={loading}
+          />
+        )
+      }
       {
         description && (
           <span className="image-gallery-description">
@@ -60,6 +88,8 @@ Item.propTypes = {
   sizes: string,
   srcSet: string,
   loading: string,
+  video: string,
+  currentIndex: number,
 };
 
 Item.defaultProps = {

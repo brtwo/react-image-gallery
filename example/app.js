@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import ImageGallery from 'src/ImageGallery';
 
-const PREFIX_URL = 'https://raw.githubusercontent.com/xiaolin/react-image-gallery/master/static/';
+const PREFIX_URL = 'https://raw.githubusercontent.com/brtwo/react-image-gallery/master/static/';
 
 
 class App extends React.Component {
@@ -12,13 +12,13 @@ class App extends React.Component {
     super();
     this.state = {
       showIndex: false,
-      showBullets: true,
+      showBullets: false,
       infinite: true,
       showThumbnails: true,
-      showFullscreenButton: true,
-      showGalleryFullscreenButton: true,
-      showPlayButton: true,
-      showGalleryPlayButton: true,
+      showFullscreenButton: false,
+      showGalleryFullscreenButton: false,
+      showPlayButton: false,
+      showGalleryPlayButton: false,
       showNav: true,
       isRTL: false,
       slideDuration: 450,
@@ -31,11 +31,10 @@ class App extends React.Component {
 
     this.images = [
       {
-        thumbnail: `${PREFIX_URL}4v.jpg`,
-        original: `${PREFIX_URL}4v.jpg`,
-        embedUrl: 'https://www.youtube.com/embed/4pSzhZ76GdM?autoplay=1&showinfo=0',
-        description: 'Render custom slides (such as videos)',
-        renderItem: this._renderVideo.bind(this)
+        original: `${PREFIX_URL}0.jpg`,
+        thumbnail: `${PREFIX_URL}0t.jpg`,
+        video: `${PREFIX_URL}video.mp4`,
+        description: 'Render video slides',
       },
       {
         original: `${PREFIX_URL}1.jpg`,

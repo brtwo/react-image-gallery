@@ -1336,6 +1336,8 @@ class ImageGallery extends React.Component {
         sizes={item.sizes}
         loading={item.loading}
         srcSet={item.srcSet}
+        video={item.video}
+        currentIndex={this.state.currentIndex}
       />
     );
   }
@@ -1608,8 +1610,8 @@ ImageGallery.defaultProps = {
   showIndex: false,
   showBullets: false,
   showThumbnails: true,
-  showPlayButton: true,
-  showFullscreenButton: true,
+  showPlayButton: false,
+  showFullscreenButton: false,
   disableThumbnailScroll: false,
   disableKeyDown: false,
   disableSwipe: false,
